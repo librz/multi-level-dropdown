@@ -11,6 +11,8 @@ import "./menu-transitions.css";
 type MenuType = "main" | "settings" | "animals";
 
 function DropdownMenu() {
+  const TRANSITION_TIMEOUT = 500;
+
   const [activeMenu, setActiveMenu] = useState<MenuType>("main");
 
   const [menuHeight, setMenuHeight] = useState<number>();
@@ -20,8 +22,7 @@ function DropdownMenu() {
   useEffect(() => {
     const menu = dropdownRef.current?.firstChild;
     if (menu) {
-      const menuHeight = (menu as HTMLElement).offsetHeight;
-      console.log("menu height", menuHeight)
+      const menuHeight = (menu as HTMLElement).clientHeight;
       setMenuHeight(menuHeight);
     }
   }, []);
@@ -34,12 +35,12 @@ function DropdownMenu() {
   return (
     <div
       className={styles["dropdown"]}
-      style={{ height: menuHeight }}
+      style={{ padding: 16, height: menuHeight ? menuHeight + 16 * 2 : undefined }}
       ref={dropdownRef}
     >
       <CSSTransition
         in={activeMenu === "main"}
-        timeout={500}
+        timeout={TRANSITION_TIMEOUT}
         classNames="menu-primary"
         unmountOnExit
         onEnter={calcHeight}
@@ -67,7 +68,7 @@ function DropdownMenu() {
 
       <CSSTransition
         in={activeMenu === "settings"}
-        timeout={500}
+        timeout={TRANSITION_TIMEOUT}
         classNames={"menu-secondary"}
         unmountOnExit
         onEnter={calcHeight}
@@ -84,7 +85,7 @@ function DropdownMenu() {
 
       <CSSTransition
         in={activeMenu === "animals"}
-        timeout={500}
+        timeout={TRANSITION_TIMEOUT}
         classNames={"menu-secondary"}
         unmountOnExit
         onEnter={calcHeight}

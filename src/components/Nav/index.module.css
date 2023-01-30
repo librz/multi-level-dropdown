@@ -2,7 +2,6 @@
   height: var(--nav-size);
   background-color: var(--bg);
   padding: 0 1rem;
-  border-bottom: var(--border);
 }
 
 .navbar-nav {
@@ -17,6 +16,7 @@
 
 .nav-item {
   width: calc(var(--nav-size) * 0.8);
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
