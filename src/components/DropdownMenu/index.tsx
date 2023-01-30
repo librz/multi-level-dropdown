@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef, ReactNode } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { ReactComponent as CogIcon } from "../../icons/cog.svg";
 import { ReactComponent as ChevronIcon } from "../../icons/chevron.svg";
 import { ReactComponent as ArrowIcon } from "../../icons/arrow.svg";
 import { ReactComponent as BoltIcon } from "../../icons/bolt.svg";
-import IconButton from "../Icon";
+import MenuItem from "./MenuItem";
 import styles from "./index.module.css";
 import "./menu-transitions.css";
 
@@ -31,29 +31,6 @@ function DropdownMenu() {
     setMenuHeight(height);
   }
 
-  function DropdownItem(props: {
-    goToMenu?: MenuType;
-    leftIcon: ReactNode;
-    children?: ReactNode;
-    rightIcon?: ReactNode;
-  }) {
-    return (
-      <div
-        className={styles["menu-item"]}
-        onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
-      >
-        <IconButton
-          icon={props.leftIcon}
-          style={{ marginRight: "0.5rem", filter: "none" }}
-        />
-        {props.children}
-        {props.rightIcon && (
-          <span className={styles["icon-right"]}>{props.rightIcon}</span>
-        )}
-      </div>
-    );
-  }
-
   return (
     <div
       className={styles["dropdown"]}
@@ -68,23 +45,23 @@ function DropdownMenu() {
         onEnter={calcHeight}
       >
         <div className={styles["menu"]}>
-          <DropdownItem leftIcon="M">
+          <MenuItem leftIcon="M">
             My Profile
-          </DropdownItem>
-          <DropdownItem
+          </MenuItem>
+          <MenuItem
             leftIcon={<CogIcon />}
             rightIcon={<ChevronIcon />}
-            goToMenu="settings"
+            onClick={() => { setActiveMenu("settings") }}
           >
             Settings
-          </DropdownItem>
-          <DropdownItem
+          </MenuItem>
+          <MenuItem
             leftIcon="🦧"
             rightIcon={<ChevronIcon />}
-            goToMenu="animals"
+            onClick={() => { setActiveMenu("animals") }}
           >
             Animals
-          </DropdownItem>
+          </MenuItem>
         </div>
       </CSSTransition>
 
@@ -96,13 +73,12 @@ function DropdownMenu() {
         onEnter={calcHeight}
       >
         <div className={styles["menu"]}>
-          <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-            <h2>My Tutorial</h2>
-          </DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>HTML</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>CSS</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>JavaScript</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>Awesome!</DropdownItem>
+          <MenuItem leftIcon={<ArrowIcon />} onClick={() => { setActiveMenu("main") }}>
+            <h2>Settings</h2>
+          </MenuItem>
+          <MenuItem leftIcon={<BoltIcon />}>Theme</MenuItem>
+          <MenuItem leftIcon={<BoltIcon />}>Payment</MenuItem>
+          <MenuItem leftIcon={<BoltIcon />}>Notification</MenuItem>
         </div>
       </CSSTransition>
 
@@ -114,13 +90,13 @@ function DropdownMenu() {
         onEnter={calcHeight}
       >
         <div className={styles["menu"]}>
-          <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
+          <MenuItem leftIcon={<ArrowIcon />} onClick={() => { setActiveMenu("main") }}>
             <h2>Animals</h2>
-          </DropdownItem>
-          <DropdownItem leftIcon="🦘">Kangaroo</DropdownItem>
-          <DropdownItem leftIcon="🐸">Frog</DropdownItem>
-          <DropdownItem leftIcon="🦋">Butterfly</DropdownItem>
-          <DropdownItem leftIcon="🦔">Hedgehog</DropdownItem>
+          </MenuItem>
+          <MenuItem leftIcon="🦘">Kangaroo</MenuItem>
+          <MenuItem leftIcon="🐸">Frog</MenuItem>
+          <MenuItem leftIcon="🦋">Butterfly</MenuItem>
+          <MenuItem leftIcon="🦔">Hedgehog</MenuItem>
         </div>
       </CSSTransition>
     </div>
