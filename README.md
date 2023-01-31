@@ -1,4 +1,4 @@
-# Modern animated multi level dropdown
+# Modern animated multi-level dropdown
 
 ### Demo
 

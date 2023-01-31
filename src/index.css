@@ -10,11 +10,22 @@ body {
 }
 
 :root {
+  --content-max-width: 1200px;
   --bg:  #242526;
-  --bg-accent: #484a4d;
   --text-color: #dadce1;
   --nav-size: 60px;
   --border: 1px solid #474a4d;
   --border-radius: 8px;
   --speed: 500ms; 
+}
+
+.description {
+  background-color: whitesmoke;
+  margin: 24px auto;
+  max-width: min(100vw - 2rem, var(--content-max-width));
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

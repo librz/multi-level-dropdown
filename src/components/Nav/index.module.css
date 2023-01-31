@@ -1,14 +1,16 @@
 .navbar {
   height: var(--nav-size);
   background-color: var(--bg);
-  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .navbar-nav {
   list-style: none;
   margin: 0;
-  padding: 0;
-  max-width: 100%;
+  padding: 0 1rem;
+  max-width: var(--content-max-width);
+  flex-grow: 1;
   height: 100%;
   display: flex;
   justify-content: flex-end;
